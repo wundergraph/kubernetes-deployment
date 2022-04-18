@@ -14,7 +14,7 @@ Deploy your WunderGraph application to your kubernetes cluster.
 make deploy
 ```
 
-_This command will build and push a production ready docker image to the registry and deploy all kubernetes files under [`./k8s`](./k8s). We use the tool [`kbld`](https://carvel.dev/kbld/)._
+_This command will build and push a production ready docker image to the registry and deploy all kubernetes files under [`./k8s`](./k8s). We use the tool [`kbld`](https://carvel.dev/kbld/) for that seeamless integration._
 
 ## Development
 
