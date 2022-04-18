@@ -7,7 +7,6 @@ RUN npm run wunderctl -- version
 
 ADD . .
 RUN npm run wunderctl -- generate
-RUN npm run wunderctl -- version
 CMD npm run wunderctl -- start --debug
 
 EXPOSE 9991
