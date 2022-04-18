@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wundergraph
+  labels:
+    app: wundergraph
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 9991
+    protocol: TCP
+    name: http
+  selector:
+    app: wundergraph

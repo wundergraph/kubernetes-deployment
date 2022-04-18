@@ -1,28 +1,3 @@
-apiVersion: kbld.k14s.io/v1alpha1
-kind: Config
-sources:
-- image: kubernetes-demo
-  path: .wundergraph
-destinations:
-- image: kubernetes-demo
-  newImage: docker.io/wundergraph/kubernetes-demo
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wundergraph
-  labels:
-    app: wundergraph
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 8080
-    targetPort: 9991
-    protocol: TCP
-    name: http
-  selector:
-    app: wundergraph
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:

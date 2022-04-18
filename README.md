@@ -16,6 +16,15 @@ make deploy
 
 _This command will build and push a production ready docker image to the registry and deploy all kubernetes files under [`./k8s`](./k8s). We use the tool [`kbld`](https://carvel.dev/kbld/) for that seeamless integration._
 
+### Access your WunderGraph
+
+```sh
+# Checkout the ip in "LoadBalancer Ingress"
+make get-ip
+curl --location --request GET 'http://${IP}/app/main/operations/Dragons' \
+--header 'Content-Type: application/json'
+```
+
 ## Development
 
 Start your local development environment.
