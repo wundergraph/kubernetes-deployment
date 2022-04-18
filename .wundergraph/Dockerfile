@@ -1,4 +1,4 @@
-FROM node:lts-slim as build
+FROM node:lts as build
 WORKDIR /usr/src/app
 COPY package*.json ./
 

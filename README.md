@@ -21,7 +21,7 @@ _This command will build and push a production ready docker image to the registr
 ```sh
 # Checkout the ip in "LoadBalancer Ingress"
 make get-ip
-curl --location --request GET 'http://${IP}/app/main/operations/Dragons' \
+curl --location --request GET 'http://${IP}/app/main/operations/Hello' \
 --header 'Content-Type: application/json'
 ```
 
