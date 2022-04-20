@@ -1,5 +1,7 @@
 # WunderGraph & Kubernetes
 
+Run WunderGraph on any Kubernetes cluster. Best Practices included!
+
 ## Prerequisites
 
 - Running kubernetes cluster (OKE, GKE, AKE or minikube)
