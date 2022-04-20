@@ -12,7 +12,7 @@ Run WunderGraph on any Kubernetes cluster. Best Practices included!
 
 Deploy your WunderGraph application to your kubernetes cluster. The application is exposed via a service of type [`load-balancer`](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/) which makes your application accessible to the public internet.
 
-Before you can deploy your WunderNode you need to provide your own docker repository. Replace `docker.io/wundergraph/kubernetes-demo` in [`./k8s/build-push.yaml`](./k8s/build-push.yaml) with your own repository adn run:
+Before you can deploy your WunderNode you need to provide your own docker repository. Replace `docker.io/wundergraph/kubernetes-demo` in [`./k8s/build-push.yaml`](./k8s/build-push.yaml) with your own repository and run:
 
 ```sh
 make deploy
