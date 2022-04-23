@@ -1,6 +1,11 @@
 # Image layer for building the application
 FROM node:lts as build
 
+# global npm dependencies: recommended to place those dependencies in the non-root user directory
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+# optionally if you want to run npm global bin without specifying path
+ENV PATH=$PATH:/home/node/.npm-global/bin
+
 WORKDIR /usr/src/app
 
 # rebuild image when package.json or lock has changed
@@ -22,13 +27,13 @@ RUN wunderctl generate
 from node:lts-alpine as runner
 WORKDIR /usr/src/app
 
-# run as non-root user
-USER node
-
 # copy entire project and dependencies
 COPY --from=build --chown=node:node /usr/src/app .
 # copy wunderctl to start the server
 COPY --from=build --chown=node:node /usr/local/bin/wunderctl /usr/local/bin/wunderctl
+
+# run as non-root user
+USER node
 
 CMD wunderctl start --listen_addr 0.0.0.0:9991 --debug
 
