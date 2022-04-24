@@ -8,6 +8,21 @@ Run WunderGraph on any Kubernetes cluster. Best Practices included!
 - [`kbld`](https://carvel.dev/kbld/) for image building, pushing, and resolution
 - [`kubectl`](https://kubernetes.io/de/docs/tasks/tools/install-kubectl/) to interact with your cluster
 
+## Project Structure
+
+```
+.
+└── app/
+    ├── .wundergraph/
+    │   ├── generated
+    │   ├── wundergraph.config.ts
+    │   ├── wundergraph.server.ts
+    │   └── wundergraph.operations.ts
+    ├── Dockerfile
+    ├── .dockerignore
+    └── package.json
+```
+
 ## Getting Started
 
 Deploy your WunderGraph application to your kubernetes cluster. The application is exposed via a service of type [`load-balancer`](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/) which makes your application accessible to the public internet.

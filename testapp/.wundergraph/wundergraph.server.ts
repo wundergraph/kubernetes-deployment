@@ -3,16 +3,36 @@ import {configureWunderGraphServer} from "@wundergraph/sdk";
 import type {HooksConfig} from "./generated/wundergraph.hooks";
 import type {InternalClient} from "./generated/wundergraph.internal.client";
 
+
 export default configureWunderGraphServer<HooksConfig,
     InternalClient>((serverContext) => ({
     hooks: {
-        queries: {},
+        queries: {
+            FakeWeather: {
+                mockResolve: async (hookContext) => {
+                    return {
+                        data: {
+                            getCityByName: {
+                                id: "1",
+                                name: "Berlin",
+                                weather: {
+                                    summary: {
+                                        title: "Weather for Berlin",
+                                        description: "0°, cloudy",
+                                    },
+                                },
+                            },
+                        },
+                    };
+                },
+            },
+        },
         mutations: {},
     },
     graphqlServers: [
         {
-            serverName: "gql",
             apiNamespace: "gql",
+            serverName: "gql",
             schema: new GraphQLSchema({
                 query: new GraphQLObjectType({
                     name: 'RootQueryType',
@@ -25,7 +45,7 @@ export default configureWunderGraphServer<HooksConfig,
                         },
                     },
                 }),
-            })
+            }),
         }
-    ],
+    ]
 }));

@@ -2,7 +2,7 @@ apiVersion: kbld.k14s.io/v1alpha1
 kind: Config
 sources:
 - image: kubernetes-demo
-  path: .wundergraph
+  path: testapp
 destinations:
 - image: kubernetes-demo
   newImage: docker.io/wundergraph/kubernetes-demo
