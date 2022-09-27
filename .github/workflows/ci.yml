@@ -1,0 +1,33 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install wunderctl
+        run: npm i -g @wundergraph/wunderctl
+
+      - name: Create WunderGraph sample app
+        run: mkdir testapp && cd testapp && wunderctl init -t nextjs-starter
+
+      - name: Copy files
+        run: cp Dockerfile ./testapp && cp .dockerignore ./testapp
+
+      - name: Install dependencies
+        working-directory: testapp
+        run: npm i
+
+      - name: Build container
+        working-directory: testapp
+        run: docker build -t wundergraph .

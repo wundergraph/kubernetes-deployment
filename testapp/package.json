@@ -1,29 +1,20 @@
 {
-  "name": "nextjs-starter",
-  "version": "0.1.0",
-  "private": true,
+  "name": "wundergraph-simple",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
-    "dev": "concurrently \"npm run nextDev\" \"npm run wundergraph\" \"npm run browser\"",
-    "wundergraph": "cd .wundergraph && wunderctl up --debug",
-    "browser": "wait-on \"http-get://localhost:3000\" && wait-on \"http-get://localhost:9991\" && open-cli http://localhost:3000",
-    "build": "next build",
-    "nextDev": "next dev",
-    "start": "next start",
-    "wunderctl": "wunderctl"
+    "start": "wunderctl up --debug",
+    "generate": "wunderctl generate up --debug",
+    "check": "tsc --noEmit"
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@wundergraph/sdk": "^0.90.6",
-    "next": "^12.0.10",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "@wundergraph/sdk": "^0.113.2",
+    "graphql": "^16.3.0"
   },
   "devDependencies": {
-    "@types/node": "^17.0.15",
-    "@types/react": "^17.0.3",
-    "concurrently": "^6.0.0",
-    "open-cli": "^7.0.1",
-    "typescript": "^4.3.5",
-    "wait-on": "^6.0.0",
-    "@wundergraph/wunderctl": "^0.90.23"
+    "@types/node": "^14.14.37",
+    "typescript": "^4.8.3"
   }
 }

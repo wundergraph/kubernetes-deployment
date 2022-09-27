@@ -14,30 +14,29 @@ COPY package*.json ./
 # install dependencies
 RUN npm ci --only=production
 
-# install wunderctl in correct version
-RUN curl -s -L https://github.com/wundergraph/wunderctl/releases/download/v0.90.23/wunderctl_0.90.23_Linux_x86_64.tar.gz | tar xzvf - && \
-    chmod +x wunderctl && mv wunderctl /usr/local/bin
-RUN wunderctl version
-
 # add project artifacts to docker image
 ADD . .
 
 # generate your wundergraph application
-RUN cd .wundergraph && wunderctl generate
+RUN npm exec wunderctl generate
 
 # Image layer for production
-from node:lts-alpine as runner
+FROM node:lts-alpine as runner
 WORKDIR /usr/src/app
 
 # copy entire project and dependencies
 COPY --from=build --chown=node:node /usr/src/app/node_modules ./node_modules
 COPY --from=build --chown=node:node /usr/src/app/.wundergraph ./.wundergraph
-# copy wunderctl to start the server
-COPY --from=build --chown=node:node /usr/local/bin/wunderctl /usr/local/bin/wunderctl
+# copy wunderctl
+COPY --from=build --chown=node:node /usr/src/app/node_modules/@wundergraph/wunderctl/download/wunderctl /usr/local/bin/wunderctl
+
+RUN wunderctl version
 
 # run as non-root user
 USER node
 
-CMD wunderctl start --listen_addr 0.0.0.0:9991 --debug
+WORKDIR .wundergraph
+
+CMD WG_NODE_HOST=0.0.0.0 wunderctl start
 
 EXPOSE 9991
