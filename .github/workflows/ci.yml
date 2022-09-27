@@ -16,13 +16,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install wunderctl
+        working-directory: testapp
         run: npm i -g @wundergraph/wunderctl
-
-      - name: Create WunderGraph sample app
-        run: mkdir testapp && cd testapp && wunderctl init -t nextjs-starter
-
-      - name: Copy files
-        run: cp Dockerfile ./testapp && cp .dockerignore ./testapp
 
       - name: Install dependencies
         working-directory: testapp

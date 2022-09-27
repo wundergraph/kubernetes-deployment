@@ -5,9 +5,9 @@
 # get-ip: 	display information of the load-balancer service. The key "LoadBalancer Ingress" represents your public ip.
 
 dev:
-	cd .wundergraph && npm run dev
+	cd testapp && npm start
 generate:
-	npm run wunderctl generate
+	cd testapp && npm run generate
 build:
 	kbld -f k8s
 deploy:
