@@ -69,19 +69,9 @@ const countries = introspect.graphql({
 	url: 'https://countries.trevorblades.com/',
 });
 
-const myApplication = new Application({
-	name: 'app',
-	apis: [
-		countries,
-		/*federatedApi,
-        openAPI,
-        graphQLAPI*/
-	],
-});
-
 // configureWunderGraph emits the configuration
 configureWunderGraphApplication({
-	application: myApplication,
+	apis: [countries /*, federatedApi, openAPI, graphQLAPI*/],
 	server,
 	operations,
 	codeGenerators: [
