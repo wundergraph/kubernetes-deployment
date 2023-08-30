@@ -24,6 +24,9 @@ RUN npm exec wunderctl generate
 FROM node:lts-alpine as runner
 WORKDIR /usr/src/app
 
+# listen on all IPv4 interfaces
+ENV WG_NODE_URL=http://127.0.0.1:9991 WG_NODE_INTERNAL_URL=http://127.0.0.1:9993 WG_NODE_HOST=0.0.0.0 WG_NODE_PORT=9991 WG_NODE_INTERNAL_PORT=9993 WG_SERVER_URL=http://127.0.0.1:9992 WG_SERVER_HOST=127.0.0.1 WG_SERVER_PORT=9992
+
 # copy entire project and dependencies
 COPY --from=build --chown=node:node /usr/src/app/node_modules ./node_modules
 COPY --from=build --chown=node:node /usr/src/app/.wundergraph ./.wundergraph
@@ -37,6 +40,6 @@ USER node
 
 WORKDIR .wundergraph
 
-CMD WG_NODE_HOST=0.0.0.0 wunderctl start
+CMD wunderctl start
 
 EXPOSE 9991
