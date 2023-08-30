@@ -11,8 +11,6 @@ WORKDIR /usr/src/app
 # rebuild image when package.json or lock has changed
 COPY package*.json ./
 
-ENV CI=true WG_COPY_BIN_PATH=/usr/local/bin/wunderctl
-
 # install dependencies
 RUN npm ci --only=production
 
@@ -20,7 +18,7 @@ RUN npm ci --only=production
 ADD . .
 
 # generate your wundergraph application
-RUN wunderctl generate
+RUN npm exec wunderctl generate
 
 # Image layer for production
 FROM node:lts-alpine as runner
@@ -33,7 +31,7 @@ ENV WG_NODE_URL=http://127.0.0.1:9991 WG_NODE_INTERNAL_URL=http://127.0.0.1:9993
 COPY --from=build --chown=node:node /usr/src/app/node_modules ./node_modules
 COPY --from=build --chown=node:node /usr/src/app/.wundergraph ./.wundergraph
 # copy wunderctl
-COPY --from=build --chown=node:node /usr/local/bin/wunderctl /usr/local/bin/wunderctl
+COPY --from=build --chown=node:node /usr/src/app/node_modules/@wundergraph/wunderctl/download/wunderctl /usr/local/bin/wunderctl
 
 RUN wunderctl version
 
